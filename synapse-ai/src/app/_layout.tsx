@@ -1,20 +1,26 @@
 import React from 'react';
-import { DarkTheme, ThemeProvider } from 'expo-router';
+import { DarkTheme, ThemeProvider, router } from 'expo-router';
 import { useColorScheme } from 'react-native';
-import { Provider as ReduxProvider } from 'react-redux';
+import { Provider as ReduxProvider, useSelector } from 'react-redux';
 import { Provider as PaperProvider } from 'react-native-paper';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import { AnimatedSplashOverlay } from '@/components/animated-icon';
 import AppTabs from '@/components/app-tabs';
-import { store } from '@/store';
+import { store, RootState } from '@/store';
 
 const queryClient = new QueryClient();
 
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
-  
-  // Custom Dark Theme matching our Brand Design System
+function NavigationWrapper() {
+  const { isOnboarded } = useSelector((state: RootState) => state.auth);
+
+  React.useEffect(() => {
+    // If onboarding is not completed, route to onboarding screen on mount
+    if (!isOnboarded) {
+      router.replace('/onboarding' as any);
+    }
+  }, [isOnboarded]);
+
   const CustomDarkTheme = {
     ...DarkTheme,
     colors: {
@@ -29,13 +35,19 @@ export default function TabLayout() {
   };
 
   return (
+    <ThemeProvider value={CustomDarkTheme}>
+      <AnimatedSplashOverlay />
+      <AppTabs />
+    </ThemeProvider>
+  );
+}
+
+export default function TabLayout() {
+  return (
     <ReduxProvider store={store}>
       <QueryClientProvider client={queryClient}>
         <PaperProvider>
-          <ThemeProvider value={CustomDarkTheme}>
-            <AnimatedSplashOverlay />
-            <AppTabs />
-          </ThemeProvider>
+          <NavigationWrapper />
         </PaperProvider>
       </QueryClientProvider>
     </ReduxProvider>
