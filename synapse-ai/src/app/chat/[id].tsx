@@ -9,6 +9,7 @@ import { GlassCard } from '@/components/GlassCard';
 import { RootState, addMessage, setStreaming } from '@/store';
 import { Spacing, Theme } from '@/constants/theme';
 import { ChevronLeft, Send, Mic, Paperclip, AlertCircle, Bot, User, Volume2, VolumeX } from 'lucide-react-native';
+import { AIAgent, Message } from '@/types';
 
 export default function ChatSessionScreen() {
   const dispatch = useDispatch();
@@ -16,7 +17,7 @@ export default function ChatSessionScreen() {
   const { agents } = useSelector((state: RootState) => state.agents);
   const { messages, isStreaming } = useSelector((state: RootState) => state.chat);
   
-  const agent = agents.find(a => a.id === id);
+  const agent = agents.find((a: AIAgent) => a.id === id);
   const conversationId = `conv_${id}`;
   const sessionMessages = messages[conversationId] || [];
 
@@ -180,7 +181,7 @@ export default function ChatSessionScreen() {
                 </ThemedText>
               </View>
             ) : (
-              sessionMessages.map((msg, index) => {
+              sessionMessages.map((msg: Message, index: number) => {
                 const isUser = msg.role === 'user';
                 return (
                   <View 

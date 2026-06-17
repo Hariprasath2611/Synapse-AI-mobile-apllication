@@ -17,11 +17,11 @@ export default function CreatorDashboardScreen() {
   
   // Calculate max withdrawable
   const pendingPayouts = creatorStats.payoutHistory
-    .filter(p => p.status === 'pending')
-    .reduce((sum, p) => sum + p.amount, 0);
+    .filter((p: any) => p.status === 'pending')
+    .reduce((sum: number, p: any) => sum + p.amount, 0);
   const completedPayouts = creatorStats.payoutHistory
-    .filter(p => p.status === 'completed')
-    .reduce((sum, p) => sum + p.amount, 0);
+    .filter((p: any) => p.status === 'completed')
+    .reduce((sum: number, p: any) => sum + p.amount, 0);
   
   const withdrawableAmount = creatorStats.totalRevenue - completedPayouts - pendingPayouts;
 
@@ -44,21 +44,21 @@ export default function CreatorDashboardScreen() {
   // Simple SVG Line Chart generator
   const renderChart = () => {
     const data = creatorStats.revenueHistory;
-    const maxVal = Math.max(...data.map(d => d.amount));
-    const minVal = Math.min(...data.map(d => d.amount));
+    const maxVal = Math.max(...data.map((d: any) => d.amount));
+    const minVal = Math.min(...data.map((d: any) => d.amount));
     const range = maxVal - minVal;
     
     const chartHeight = 120;
     const chartWidth = 300;
     const padding = 15;
     
-    const points = data.map((d, index) => {
+    const points = data.map((d: any, index: number) => {
       const x = padding + (index * (chartWidth - padding * 2)) / (data.length - 1);
       const y = chartHeight - padding - ((d.amount - minVal) * (chartHeight - padding * 2)) / range;
-      return { x, y };
+      return { x, y, cx: undefined, cy: undefined };
     });
 
-    const linePath = points.map((p, i) => `${i === 0 ? 'M' : 'L'} ${p.x} ${p.y}`).join(' ');
+    const linePath = points.map((p: any, i: number) => `${i === 0 ? 'M' : 'L'} ${p.x} ${p.y}`).join(' ');
     
     // Gradient fill path
     const fillPath = `${linePath} L ${points[points.length - 1].x} ${chartHeight - padding} L ${points[0].x} ${chartHeight - padding} Z`;
@@ -77,12 +77,12 @@ export default function CreatorDashboardScreen() {
           <Path d={linePath} fill="none" stroke={Theme.colors.primary} strokeWidth="3" />
 
           {/* Data Nodes */}
-          {points.map((p, i) => (
+          {points.map((p: any, i: number) => (
             <Circle key={i} cx={p.cx ?? p.x} cy={p.cy ?? p.y} r="4" fill={Theme.colors.accent} />
           ))}
         </Svg>
         <View style={styles.chartLabels}>
-          {data.map((d, i) => (
+          {data.map((d: any, i: number) => (
             <ThemedText key={i} style={styles.chartLabelText}>{d.month}</ThemedText>
           ))}
         </View>
@@ -169,14 +169,14 @@ export default function CreatorDashboardScreen() {
 
           {/* History */}
           <ThemedText style={styles.sectionTitle}>Payout History</ThemedText>
-          {creatorStats.payoutHistory.map((payout) => (
+          {creatorStats.payoutHistory.map((payout: any) => (
             <GlassCard key={payout.id} style={styles.historyCard}>
               <View style={styles.historyRow}>
                 <View>
                   <ThemedText style={styles.historyDate}>{payout.date}</ThemedText>
                   <ThemedText style={styles.historyId}>{payout.id}</ThemedText>
                 </View>
-                <View style={{ alignItems: 'end' }}>
+                <View style={{ alignItems: 'flex-end' }}>
                   <ThemedText style={styles.historyAmount}>${payout.amount.toFixed(2)}</ThemedText>
                   <View style={[
                     styles.statusBadge,
