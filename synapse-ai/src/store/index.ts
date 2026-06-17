@@ -1,5 +1,5 @@
 import { configureStore, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { UserProfile, AIAgent, Conversation, Message, KnowledgeBase, DocumentItem, Workflow, CreatorStats, TeamWorkspace } from '../types';
+import { UserProfile, AIAgent, Conversation, Message, KnowledgeBase, DocumentItem, Workflow, CreatorStats, TeamWorkspace, WorkflowExecution } from '../types';
 import { MOCK_AGENTS, MOCK_CONVERSATIONS, MOCK_KNOWLEDGE_BASES, MOCK_DOCUMENTS, MOCK_WORKFLOWS, MOCK_CREATOR_STATS, MOCK_TEAMS } from '../constants/mockData';
 
 // --- AUTH SLICE ---
