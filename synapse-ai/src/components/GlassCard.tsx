@@ -1,10 +1,10 @@
 import React from 'react';
-import { StyleSheet, View, ViewStyle, Platform } from 'react-native';
+import { StyleSheet, View, ViewStyle, Platform, StyleProp } from 'react-native';
 import { Theme } from '../constants/theme';
 
 interface GlassCardProps {
   children: React.ReactNode;
-  style?: ViewStyle;
+  style?: StyleProp<ViewStyle>;
   borderColor?: string;
   backgroundColor?: string;
 }
