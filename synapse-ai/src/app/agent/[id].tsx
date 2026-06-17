@@ -8,14 +8,14 @@ import { ThemedView } from '@/components/themed-view';
 import { GlassCard } from '@/components/GlassCard';
 import { RootState, toggleBookmark, createConversation } from '@/store';
 import { Spacing, Theme } from '@/constants/theme';
-import { ChevronLeft, Star, Bookmark, MessageSquare, Play, HelpCircle, FileText, Settings } from 'lucide-react-native';
+import { ChevronLeft, Star, Bookmark, MessageSquare, Play, HelpCircle, FileText, Settings, Cpu } from 'lucide-react-native';
 
 export default function AgentProfileScreen() {
   const dispatch = useDispatch();
   const { id } = useLocalSearchParams();
   const { agents } = useSelector((state: RootState) => state.agents);
   
-  const agent = agents.find(a => a.id === id);
+  const agent = agents.find((a: any) => a.id === id);
 
   if (!agent) {
     return (
@@ -115,7 +115,7 @@ export default function AgentProfileScreen() {
           {/* Capabilities */}
           <ThemedText style={styles.sectionTitle}>Capabilities & Skills</ThemedText>
           <View style={styles.capabilitiesContainer}>
-            {agent.capabilities.map((cap, index) => (
+            {agent.capabilities.map((cap: any, index: number) => (
               <GlassCard key={index} style={styles.capabilityItem} borderColor="rgba(109, 40, 217, 0.15)">
                 <Cpu size={16} color={Theme.colors.primary} style={{ marginRight: Spacing.sm }} />
                 <ThemedText style={styles.capabilityText}>{cap}</ThemedText>
@@ -130,7 +130,7 @@ export default function AgentProfileScreen() {
               <ThemedText style={styles.bodyTextMuted}>No external document databases connected.</ThemedText>
             </GlassCard>
           ) : (
-            agent.knowledgeBases.map((kb, index) => (
+            agent.knowledgeBases.map((kb: any, index: number) => (
               <GlassCard key={index} style={styles.kbItem}>
                 <FileText size={18} color={Theme.colors.accent} style={{ marginRight: Spacing.md }} />
                 <View style={{ flex: 1 }}>

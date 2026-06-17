@@ -15,14 +15,14 @@ export default function ChatListScreen() {
   const { conversations } = useSelector((state: RootState) => state.chat);
   const [search, setSearch] = React.useState('');
 
-  const filteredConversations = conversations.filter(c => 
+  const filteredConversations = conversations.filter((c: any) => 
     c.agentName.toLowerCase().includes(search.toLowerCase()) ||
     c.lastMessage.toLowerCase().includes(search.toLowerCase())
   );
 
   // Separate pinned vs standard
-  const pinnedConvs = filteredConversations.filter(c => c.pinned);
-  const standardConvs = filteredConversations.filter(c => !c.pinned);
+  const pinnedConvs = filteredConversations.filter((c: any) => c.pinned);
+  const standardConvs = filteredConversations.filter((c: any) => !c.pinned);
   const sortedConversations = [...pinnedConvs, ...standardConvs];
 
   const handleChatPress = (agentId: string, convId: string) => {
@@ -77,7 +77,7 @@ export default function ChatListScreen() {
                 <GlassCard 
                   style={[
                     styles.convCard, 
-                    item.unreadCount > 0 && styles.unreadCard
+                    item.unreadCount > 0 ? styles.unreadCard : null
                   ]}
                   borderColor={item.pinned ? 'rgba(6, 182, 212, 0.35)' : 'rgba(99, 102, 241, 0.15)'}
                 >

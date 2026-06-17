@@ -128,7 +128,7 @@ export default function AgentBuilderScreen() {
             <View style={styles.formGroup}>
               <ThemedText style={styles.label}>Category</ThemedText>
               <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ marginVertical: Spacing.sm }}>
-                {categories.filter(c => c !== 'All').map((cat) => {
+                {categories.filter((c: any) => c !== 'All').map((cat: any) => {
                   const isSelected = category === cat;
                   return (
                     <Pressable
