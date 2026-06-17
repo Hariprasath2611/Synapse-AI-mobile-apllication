@@ -50,7 +50,7 @@ export default function WorkflowScreen() {
 
           {/* Workflows List */}
           <ThemedText style={styles.sectionTitle}>Automations Registry</ThemedText>
-          {workflows.map((wf) => (
+          {workflows.map((wf: any) => (
             <GlassCard key={wf.id} style={styles.workflowCard} borderColor="rgba(109, 40, 217, 0.25)">
               <View style={styles.wfHeaderRow}>
                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
@@ -70,7 +70,7 @@ export default function WorkflowScreen() {
               {/* Connected Nodes Visual block */}
               <View style={styles.nodePipeline}>
                 <ThemedText style={styles.pipelineTitle}>Execution Steps</ThemedText>
-                {wf.nodes.map((node, i) => (
+                {wf.nodes.map((node: any, i: number) => (
                   <View key={node.id} style={styles.pipelineStepRow}>
                     <View style={styles.nodeCircle}>
                       <ThemedText style={styles.nodeCircleText}>{i + 1}</ThemedText>
@@ -100,7 +100,7 @@ export default function WorkflowScreen() {
 
           {/* Recent execution histories */}
           <ThemedText style={styles.sectionTitle}>Recent Execution Log History</ThemedText>
-          {executions.map((exec) => (
+          {executions.map((exec: any) => (
             <GlassCard key={exec.id} style={styles.logCard}>
               <View style={styles.logHeader}>
                 <View>
@@ -122,7 +122,7 @@ export default function WorkflowScreen() {
 
               {/* Execution Steps Log Details */}
               <View style={styles.logSteps}>
-                {exec.steps.map((step, index) => (
+                {exec.steps.map((step: any, index: number) => (
                   <View key={index} style={styles.logStepRow}>
                     <View style={[styles.stepDot, { backgroundColor: Theme.colors.success }]} />
                     <ThemedText style={styles.stepLogText}>{step.name} - Successful</ThemedText>
