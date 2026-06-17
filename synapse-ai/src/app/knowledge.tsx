@@ -19,7 +19,7 @@ export default function KnowledgeBaseScreen() {
   const [newKbDesc, setNewKbDesc] = React.useState('');
   const [isCreating, setIsCreating] = React.useState(false);
 
-  const filteredKbs = knowledgeBases.filter(kb =>
+  const filteredKbs = knowledgeBases.filter((kb: any) =>
     kb.name.toLowerCase().includes(search.toLowerCase()) ||
     kb.description.toLowerCase().includes(search.toLowerCase())
   );
@@ -136,8 +136,8 @@ export default function KnowledgeBaseScreen() {
           </View>
 
           {/* KBs List */}
-          {filteredKbs.map((kb) => {
-            const kbDocs = documents.filter(doc => doc.kbId === kb.id);
+          {filteredKbs.map((kb: any) => {
+            const kbDocs = documents.filter((doc: any) => doc.kbId === kb.id);
             return (
               <GlassCard key={kb.id} style={styles.kbCard} borderColor="rgba(109, 40, 217, 0.2)">
                 <View style={styles.kbHeader}>
@@ -163,7 +163,7 @@ export default function KnowledgeBaseScreen() {
                 {kbDocs.length > 0 && (
                   <View style={styles.docsList}>
                     <ThemedText style={styles.docsTitle}>Document Embedding Queue</ThemedText>
-                    {kbDocs.map((doc) => (
+                    {kbDocs.map((doc: any) => (
                       <View key={doc.id} style={styles.docItem}>
                         <FileText size={16} color={Theme.colors.textMuted} />
                         <View style={{ flex: 1, marginLeft: Spacing.sm }}>

@@ -76,7 +76,7 @@ export default function TeamWorkspaceScreen() {
           )}
 
           <ThemedText style={styles.sectionTitle}>Shared Workspaces</ThemedText>
-          {teams.map((team) => (
+          {teams.map((team: any) => (
             <GlassCard key={team.id} style={styles.teamCard} borderColor="rgba(16, 185, 129, 0.2)">
               <View style={styles.teamHeader}>
                 <Users size={22} color={Theme.colors.accent} />

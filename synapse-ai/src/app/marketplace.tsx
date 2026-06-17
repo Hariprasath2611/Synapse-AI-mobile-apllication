@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, ScrollView, TextInput, Pressable, Image, FlatList } from 'react-native';
+import { StyleSheet, View, ScrollView, TextInput, Pressable, Image, FlatList, Platform } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useSelector, useDispatch } from 'react-redux';
 import { router } from 'expo-router';
@@ -16,7 +16,7 @@ export default function MarketplaceScreen() {
   const { agents, categories, selectedCategory, searchQuery } = useSelector((state: RootState) => state.agents);
 
   // Filter logic
-  const filteredAgents = agents.filter(agent => {
+  const filteredAgents = agents.filter((agent: any) => {
     const matchesCategory = selectedCategory === 'All' || agent.category === selectedCategory;
     const matchesSearch = agent.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
                           agent.description.toLowerCase().includes(searchQuery.toLowerCase());
@@ -52,7 +52,7 @@ export default function MarketplaceScreen() {
         {/* Category List */}
         <View style={styles.categoriesContainer}>
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-            {categories.map((category) => {
+            {categories.map((category: any) => {
               const isSelected = selectedCategory === category;
               return (
                 <Pressable
@@ -123,7 +123,7 @@ export default function MarketplaceScreen() {
                 </ThemedText>
 
                 <View style={styles.capabilities}>
-                  {item.capabilities.slice(0, 2).map((cap, i) => (
+                  {item.capabilities.slice(0, 2).map((cap: any, i: number) => (
                     <View key={i} style={styles.capBadge}>
                       <ThemedText style={styles.capBadgeText}>{cap}</ThemedText>
                     </View>
