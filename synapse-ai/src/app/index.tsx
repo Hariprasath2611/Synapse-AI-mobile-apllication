@@ -108,7 +108,7 @@ export default function HomeScreen() {
             </Pressable>
           </View>
           <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.horizontalScroll}>
-            {trendingAgents.map((agent) => (
+            {trendingAgents.map((agent: any) => (
               <GlassCard key={agent.id} style={styles.agentCard}>
                 <View style={styles.agentHeader}>
                   <Image source={{ uri: agent.avatar }} style={styles.agentAvatar} />
@@ -153,7 +153,7 @@ export default function HomeScreen() {
               <ThemedText style={styles.emptyText}>No recent chats. Head to the marketplace to get started!</ThemedText>
             </GlassCard>
           ) : (
-            recentChats.map((chat) => (
+            recentChats.map((chat: any) => (
               <Pressable 
                 key={chat.id} 
                 onPress={() => router.push({ pathname: '/chat/[id]', params: { id: chat.agentId } } as any)}
